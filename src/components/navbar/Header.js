@@ -58,7 +58,7 @@ const Header = () => {
                         <Button sx={navBtnStyle}>Experience</Button>
                     </Link>
 
-                    <Link to="projects" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
+                    <Link to="project" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
                         <Button sx={navBtnStyle}>Projects</Button>
                     </Link>
 

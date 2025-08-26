@@ -10,11 +10,12 @@ const Experience = () => {
             id="experience"
             sx={{
                 backgroundColor: 'rgb(13, 1, 33)',
-                px: { md: 10, xs: 3, sm: 6 },
+                px: { md: 10, xs: 1, sm: 6 },
                 py: { md: 2, xs: 4, sm: 2 },
                 minHeight: { xs: '80vh', md: '70vh', sm: '70vh' },
                 justifyContent: 'center',
                 alignItems: 'center',
+                mt: { xs: -3, md: -6 }
             }}
         >
             {/* LEFT SIDE: Text Content */}

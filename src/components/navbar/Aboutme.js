@@ -57,7 +57,7 @@ const Aboutme = () => {
         backgroundColor: 'rgb(13, 1, 33)',
         px: { md: 10, xs: 3, sm: 6 },
         py: { md: 6, xs: 4 },
-        mt: { md: -8, xs: 3 },
+        mt: { md: -8, xs: 0 },
         minHeight: { xs: '60vh', md: '90vh' },
         overflow: 'hidden',
         justifyContent: 'center',

@@ -43,61 +43,63 @@ const Skills = () => {
     const imgContainerStyle = {
         width: '100%',
         height: 'auto',
-        maxHeight: { xs: '80px', sm: '100px', md: '120px' }, // responsive
+        maxHeight: { xs: '80px', sm: '100px', md: '100px' }, // responsive
         borderRadius: '8px',
     };
 
     return (
-        <Container>
-            <Grid
-                container
-                justifyContent="center"
-                sx={{
-                    backgroundColor: 'rgb(13, 1, 33)',
-                    py: 6,
+        // <Container>
+        <Grid
+            container
+            justifyContent="center"
+            sx={{
+                backgroundColor: 'rgb(13, 1, 33)',
+                py: { md: 6, xs: 2 },
+                px: { md: 8, xs: 4 }
 
+            }}
+        >
+            <Typography
+                variant="h2"
+                sx={{
+                    color: 'white',
+                    fontWeight: 600,
+                    fontFamily: 'inherit',
+                    fontSize: { md: '2.5rem', xs: '2rem' },
+                    textAlign: 'center',
+                    mb: 5,
+                    width: '100%',
                 }}
             >
-                <Typography
-                    variant="h2"
-                    sx={{
-                        color: 'white',
-                        fontWeight: 600,
-                        fontFamily: 'inherit',
-                        fontSize: { md: '2.5rem', xs: '2rem' },
-                        textAlign: 'center',
-                        mb: 5,
-                        width: '100%',
-                    }}
-                >
-                    My Skills
-                </Typography>
+                My Skills
+            </Typography>
 
-                <Box
-                    sx={{
-                        backgroundColor: '#fff',
-                        width: '200%',
-                        overflow: 'hidden',
-                        borderRadius: 5,
-                        py: 2,
-                    }}
-                >
-                    {/* Duplicate stats for seamless scroll */}
-                    <Box sx={scrollImages} gap={10}>
-                        {[...stats, ...stats].map((stat, index) => (
-                            <Box key={index} sx={imgStyle}>
-                                <Box
-                                    component="img"
-                                    src={stat.img}
-                                    alt={`portfolio ${index}`}
-                                    sx={imgContainerStyle}
-                                />
-                            </Box>
-                        ))}
-                    </Box>
+            <Box
+                sx={{
+                    backgroundColor: '#fff',
+                    width: '200%',
+                    // width: 'max-content',
+                    overflow: 'hidden',
+                    borderRadius: 5,
+                    py: 2,
+                }}
+            >
+                {/* Duplicate stats for seamless scroll */}
+                <Box sx={scrollImages} gap={10}>
+                    {[...stats, ...stats].map((stat, index) => (
+                        <Box key={index} sx={imgStyle}>
+                            <Box
+                                component="img"
+                                src={stat.img}
+                                alt={`portfolio ${index}`}
+                                sx={imgContainerStyle}
+                            />
+                        </Box>
+                    ))}
                 </Box>
-            </Grid>
-        </Container>
+            </Box>
+        </Grid>
+        // </Container>
     );
 };
 

@@ -48,7 +48,7 @@ function PDFViewer({ url, height = 300 }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    bgcolor: '#f5f5f5',
+                    bgcolor: 'rgb(13, 1, 33)',
                 }}
             >
                 <Typography variant="body2" color="text.secondary">
@@ -94,29 +94,31 @@ function PDFViewer({ url, height = 300 }) {
 export default function PPTCards() {
     const pdfs = [
         {
-            url: '/getmoredigital.pdf',
+            url: 'https://www.getmoredigital.com/',
             title: 'GetMoreDigital',
             external: false,
             link: 'https://www.getmoredigital.com/'
         },
         {
-            url: '/pucolleges.pdf',
+            url: 'https://www.pucollegesinbangalore.com/',
             title: 'PU Colleges',
             external: false,
-            link: 'https://pucollegesinbangalore.com/'
+            link: 'https://www.pucollegesinbangalore.com/'
         },
         {
-            url: 'https://pucollegesinbangalore.com/',
-            title: 'PU Colleges Website',
+            url: 'https://smiti-constructions.vercel.app/',
+            title: 'Smiti Constructions',
             external: false,
-            link: 'https://pucollegesinbangalore.com/'
+            link: 'https://smiti-constructions.vercel.app/'
         },
-    ];
 
+    ];
     const handleDownload = (pdf) => {
         if (pdf.external || pdf.url.startsWith('http')) {
+            // Open external link
             window.open(pdf.url, '_blank');
         } else {
+            // Download local PDF
             const link = document.createElement('a');
             link.href = pdf.url;
             link.download = pdf.title + '.pdf';
@@ -127,15 +129,7 @@ export default function PPTCards() {
     };
 
     return (
-        <Grid
-            container
-            id="projects"
-            sx={{
-                py: 6,
-                px: { md: 10, xs: 2, sm: 4 },
-                minHeight: { md: '90vh', xs: 'auto', sm: '100vh' },
-            }}
-        >
+        <Grid cotainer id="project" sx={{ py: 4, px: { md: 10, xs: 3, sm: 6 }, height: { md: '90vh', sm: '160vh' }, backgroundColor: 'rgb(13, 1, 33)' }}>
             <Box sx={{ width: '100%' }}>
                 {/* Heading */}
                 <Typography
@@ -156,37 +150,28 @@ export default function PPTCards() {
                     sx={{
                         color: 'lightgray',
                         fontFamily: 'inherit',
-                        fontSize: { md: '1.2rem', sm: '1rem', xs: '0.9rem' },
+                        fontSize: { md: '1.2rem', sm: '1.3rem', xs: '0.9rem' },
                         lineHeight: 2,
                         textAlign: 'center',
                         mt: 2,
                         mb: 5,
-                        px: { xs: 1, sm: 4, md: 12 },
+
                     }}
                 >
-                    <FormatQuoteIcon sx={{ color: 'orange', transform: 'rotate(180deg)', mt: '-8px', fontSize: '28px' }} />
-                    Here is a showcase of my projects that demonstrate my expertise in building modern web applications and dynamic e-commerce platforms.
-                    Each project reflects my ability to blend creative design with robust development, delivering user-friendly, scalable, and results-driven digital solutions
-                    <FormatQuoteIcon sx={{ color: 'orange', fontSize: '28px' }} />
+                    <FormatQuoteIcon sx={{ color: 'orange', transform: 'rotate(180deg)', mt: '-8px', fontSize: '30px' }} /> Here is a showcase of my projects that demonstrate my expertise in building modern web applications and dynamic e-commerce platforms. Each project reflects my ability to blend creative design with robust development, delivering user-friendly, scalable, and results-driven digital solutions <FormatQuoteIcon sx={{ color: 'orange', fontSize: '30px' }} />
                 </Typography>
-            </Box>
 
-            {/* Cards */}
-            <Stack
-                direction={{ xs: 'column', md: 'row' }}
-                spacing={{ md: 9, xs: 4 }}
-                sx={{ width: '100%', alignItems: 'center' }}
-            >
+            </Box>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
                 {pdfs.map((pdf, index) => (
                     <Card
                         key={index}
                         sx={{
-                            width: { xs: '100%', sm: '100%', md: '100%' },
-                            maxWidth: { md: '380px' },
-                            height: { xs: 'auto', md: 420 },
+                            flex: 1,
+                            height: 400,
                             borderRadius: '20px',
                             border: '1px solid yellow',
-                            position: 'relative',
+                            position: 'relative', // for top icon
                             display: 'flex',
                             flexDirection: 'column',
                         }}
@@ -207,31 +192,19 @@ export default function PPTCards() {
                             <DownloadIcon />
                         </IconButton>
 
-                        <PDFViewer url={pdf.url} height={250} />
-                        <Divider sx={{ width: '90%', background: 'black', mt: 2, mx: 'auto' }} />
+                        <PDFViewer url={pdf.url} height={300} />
+                        <Divider sx={{ width: '90%', background: 'black', mt: 2, ml: 2.5 }} />
                         <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <Typography
-                                variant="h6"
-                                sx={{ textAlign: { xs: 'center', md: 'left' }, fontSize: { xs: '1rem', sm: '1.1rem' } }}
-                            >
-                                {pdf.title}
-                            </Typography>
+                            <Typography variant="h6">{pdf.title}</Typography>
                             {pdf.link && (
                                 <Button
                                     component="a"
                                     href={pdf.link}
                                     target="_blank"
-                                    sx={{
-                                        mt: 1,
-                                        background: "lightyellow",
-                                        color: 'black',
-                                        borderRadius: "20px",
-                                        fontSize: { xs: "0.8rem", sm: "0.9rem" },
-                                        px: { xs: 2, sm: 3 },
-                                    }}
+                                    sx={{ mt: 1, background: "lightyellow", color: 'black', borderRadius: "20px" }}
                                     variant="contained"
                                 >
-                                    Know more
+                                    Know more about Project
                                 </Button>
                             )}
                         </CardContent>

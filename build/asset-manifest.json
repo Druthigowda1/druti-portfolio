@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/portfolio/static/js/main.0157eb51.js",
+    "static/media/image21.png": "/portfolio/static/media/image21.78f4d6885d2578f73e96.png",
+    "static/media/content-writting.png": "/portfolio/static/media/content-writting.c10d6f1ef5450c019258.png",
+    "static/media/aboutme.png": "/portfolio/static/media/aboutme.1fd705b626abc1952fad.png",
+    "static/media/logo1.png": "/portfolio/static/media/logo1.85a62d9dd3e5ae1d62f2.png",
+    "static/media/google-ads.png": "/portfolio/static/media/google-ads.26e051c48914e10e0cf2.png",
+    "static/media/seo.png": "/portfolio/static/media/seo.2a9fa6c249abbd3eb541.png",
+    "static/media/reactjs.png": "/portfolio/static/media/reactjs.0c65cfa24d6c33e737b2.png",
+    "static/media/content.png": "/portfolio/static/media/content.6b3ae52b8977cf949229.png",
+    "static/media/ads.png": "/portfolio/static/media/ads.8c2fb22a28eabcd27f74.png",
+    "static/media/javascript.png": "/portfolio/static/media/javascript.e6422bded0cb64da613e.png",
+    "static/media/html.png": "/portfolio/static/media/html.27d7debe2b8903778895.png",
+    "static/media/css.png": "/portfolio/static/media/css.f29083184224290651aa.png",
+    "static/media/ui-design.png": "/portfolio/static/media/ui-design.c4acd455fc2040eddcc8.png",
+    "index.html": "/portfolio/index.html",
+    "main.0157eb51.js.map": "/portfolio/static/js/main.0157eb51.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.0157eb51.js"
+  ]
+}

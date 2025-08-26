@@ -42,6 +42,7 @@ const Contact = () => {
                 py: { xs: 6, md: 10 },
                 minHeight: { xs: '70vh', md: '90vh' },
                 alignItems: 'center',
+                mt: { xs: 0, md: -13 }
             }}
         >
             <Box sx={{ width: '100%' }}>
