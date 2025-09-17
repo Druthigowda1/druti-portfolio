@@ -9,15 +9,8 @@ import { Link } from 'react-scroll';
 const Header = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
 
-    const links = [
-        { label: 'Home', to: 'home' },
-        { label: 'About', to: 'about' },
-        { label: 'Experience', to: 'Experience' },
-        { label: 'Projects', to: 'Projects' },
-    ];
-
     return (
-        <div style={{ background: 'rgb(13, 1, 33)', color: 'white', }}>
+        <div style={{ background: 'rgb(13, 1, 33)', color: 'white' }}>
             <Grid
                 container
                 alignItems="center"
@@ -31,79 +24,81 @@ const Header = () => {
                     backgroundColor: 'rgb(13, 1, 33)',
                 }}
             >
-                {/* Left Logo */}
+                {/* Logo */}
                 <Grid item xs={6} md={2}>
-                    <img
-                        src={logo}
-                        alt="logo"
-                        style={{ height: '60px', cursor: 'pointer' }}
-                    />
+                    <Link to="home" smooth={true} duration={500} offset={-80}>
+                        <img
+                            src={logo}
+                            alt="logo"
+                            style={{ height: '60px', cursor: 'pointer' }}
+                        />
+                    </Link>
                 </Grid>
 
-                {/* Desktop Nav Links */}
+                {/* Desktop Nav */}
                 <Grid
                     item
                     xs={0}
                     md={7}
-                    sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center', gap: 3 }}
+                    sx={{
+                        display: { xs: 'none', md: 'flex' },
+                        justifyContent: 'center',
+                        gap: 5,
+                    }}
                 >
-                    {links.map((link) => (
-                        <Button
-                            key={link.to}
-                            sx={{
-                                color: 'white',
-                                textTransform: 'none',
-                                fontWeight: 'bold',
-                                fontSize: { xs: '0.9rem', md: '1.125rem' }, // responsive font size
-                                position: 'relative',
-                                '&::after': {
-                                    content: '""',
-                                    position: 'absolute',
-                                    left: 0,
-                                    bottom: 0,
-                                    width: '0%',
-                                    height: '3px',
-                                    backgroundColor: 'yellow',
-                                    transition: 'width 0.3s ease-in-out',
-                                },
-                                '&:hover::after': {
-                                    width: '100%',
-                                },
-                            }}
-                        >
-                            <Link to={link.to} smooth={true} duration={500}>
-                                {link.label}
-                            </Link>
-                        </Button>
-                    ))}
+                    <Link to="home" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
+                        <Button sx={navBtnStyle}>Home</Button>
+                    </Link>
+
+                    <Link to="about" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
+                        <Button sx={navBtnStyle}>About</Button>
+                    </Link>
+
+                    <Link to="experience" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
+                        <Button sx={navBtnStyle}>Experience</Button>
+                    </Link>
+
+                    <Link to="projects" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
+                        <Button sx={navBtnStyle}>Projects</Button>
+                    </Link>
+
+                    <Link to="resume" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
+                        <Button sx={navBtnStyle}>Resume</Button>
+                    </Link>
+
+                    <Link to="contact" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link">
+                        <Button sx={navBtnStyle}>Contact</Button>
+                    </Link>
                 </Grid>
 
-                {/* Right Contact Button (Desktop) */}
+                {/* Contact Button (Desktop) */}
                 <Grid
                     item
                     md={3}
                     sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}
                 >
-                    <Button
-                        variant="contained"
-                        sx={{
-                            background: 'white',
-                            color: 'black',
-                            fontWeight: 'bold',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 1.5,
-                            textTransform: 'none',
-                            padding: { xs: '6px 12px', md: '6px 16px' },
-                            fontSize: { xs: '0.9rem', md: '1rem' }, // responsive font size
-                        }}
-                    >
-                        <img src={message} alt="message icon" style={{ width: 20, height: 20 }} />
-                        Contact Me
-                    </Button>
+                    <Link to="contact" smooth={true} duration={500} offset={-80}>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                background: 'white',
+                                color: 'black',
+                                fontWeight: 'bold',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1.5,
+                                textTransform: 'none',
+                                padding: { xs: '6px 12px', md: '6px 16px' },
+                                fontSize: { xs: '0.9rem', md: '1rem' },
+                            }}
+                        >
+                            <img src={message} alt="message icon" style={{ width: 20, height: 20 }} />
+                            Contact Me
+                        </Button>
+                    </Link>
                 </Grid>
 
-                {/* Mobile Menu Icon */}
+                {/* Mobile Menu Toggle */}
                 <Grid
                     item
                     xs={6}
@@ -113,7 +108,6 @@ const Header = () => {
                     <IconButton
                         onClick={() => setMobileOpen(!mobileOpen)}
                         sx={{ color: 'white' }}
-                        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
                     >
                         {mobileOpen ? <CloseIcon /> : <MenuIcon />}
                     </IconButton>
@@ -137,53 +131,105 @@ const Header = () => {
                     },
                 }}
             >
-                {/* Mobile Nav Links */}
-                {links.map((link) => (
+                <Link to="home" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link" onClick={() => setMobileOpen(false)}>
+                    <Button sx={drawerBtnStyle}>Home</Button>
+                </Link>
+
+                <Link to="about" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link" onClick={() => setMobileOpen(false)}>
+                    <Button sx={drawerBtnStyle}>About</Button>
+                </Link>
+
+                <Link to="experience" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link" onClick={() => setMobileOpen(false)}>
+                    <Button sx={drawerBtnStyle}>Experience</Button>
+                </Link>
+
+                <Link to="projects" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link" onClick={() => setMobileOpen(false)}>
+                    <Button sx={drawerBtnStyle}>Projects</Button>
+                </Link>
+
+                <Link to="resume" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link" onClick={() => setMobileOpen(false)}>
+                    <Button sx={drawerBtnStyle}>Resume</Button>
+                </Link>
+
+                <Link to="contact" smooth={true} duration={500} offset={-80} spy={true} activeClass="active-link" onClick={() => setMobileOpen(false)}>
+                    <Button sx={drawerBtnStyle}>Contact</Button>
+                </Link>
+
+                {/* Mobile Contact Button */}
+                <Link
+                    to="contact"
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    onClick={() => setMobileOpen(false)}
+                    style={{ textDecoration: 'none' }}
+                >
                     <Button
-                        key={link.to}
-                        component={Link}
-                        to={link.to}
-                        smooth={true}
-                        duration={500}
-                        onClick={() => setMobileOpen(false)}
+                        variant="contained"
+                        id="contact"
                         sx={{
-                            color: 'white',
-                            textTransform: 'none',
+                            background: 'white',
+                            color: 'black',
                             fontWeight: 'bold',
-                            justifyContent: 'flex-start',
-                            px: 3,
-                            py: 1.5,
-                            width: '100%',
-                            fontSize: '1rem', // slightly bigger on mobile drawer for tap targets
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.5,
+                            textTransform: 'none',
+                            padding: '6px 16px',
+                            width: '80%',
+                            alignSelf: 'center',
+                            mt: 3,
+                            fontSize: '1rem',
                         }}
                     >
-                        {link.label}
+                        <img src={message} alt="message icon" style={{ width: 20, height: 20 }} />
+                        Contact Now
                     </Button>
-                ))}
-
-                <Button
-                    variant="contained"
-                    sx={{
-                        background: 'white',
-                        color: 'black',
-                        fontWeight: 'bold',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 1.5,
-                        textTransform: 'none',
-                        padding: '6px 16px',
-                        width: '80%',
-                        alignSelf: 'center',
-                        mt: 3,
-                        fontSize: '1rem', // consistent size on mobile drawer
-                    }}
-                >
-                    <img src={message} alt="message icon" style={{ width: 20, height: 20 }} />
-                    Contact Now
-                </Button>
+                </Link>
             </Drawer>
         </div>
     );
+};
+
+// Common Styles
+const navBtnStyle = {
+    color: 'white',
+    textTransform: 'none',
+    fontWeight: 'bold',
+    fontSize: { xs: '0.9rem', md: '1.125rem' },
+    position: 'relative',
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        width: '0%',
+        height: '3px',
+        backgroundColor: 'yellow',
+        transition: 'width 0.3s ease-in-out',
+    },
+    '&:hover::after': {
+        width: '100%',
+    },
+    '&.active-link': {
+        color: 'yellow',
+        '&::after': { width: '100%' },
+    },
+};
+
+const drawerBtnStyle = {
+    color: 'white',
+    textTransform: 'none',
+    fontWeight: 'bold',
+    justifyContent: 'flex-start',
+    px: 3,
+    py: 1.5,
+    width: '100%',
+    fontSize: '1rem',
+    '&.active-link': {
+        color: 'yellow',
+        backgroundColor: 'rgba(255,255,255,0.1)',
+    },
 };
 
 export default Header;

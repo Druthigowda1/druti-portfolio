@@ -1,148 +1,104 @@
-import { Grid, Typography, Box, Card } from '@mui/material';
 import React from 'react';
-import ui from '../../assets/ui-design.png';
-import web from '../../assets/website-design.png';
-import content from '../../assets/content-writting.png';
-import ads from '../../assets/google-ads.png'
-import seo from '../../assets/seo.png'
+import { Grid, Box, Typography, Container } from '@mui/material';
+import { keyframes } from '@emotion/react';
 
-const skillsData = [
-  {
-    id: 1,
-    title: "UI/UX design",
-    img: ui,
-    desc: "I create user-friendly interfaces that are visually appealing and improve user experience. For smooth interactions, I concentrate on striking a balance between creativity and functionality",
-  },
-  {
-    id: 2,
-    title: "Website design",
-    img: web,
-    desc: "I create cutting-edge, responsive, and effective websites.Converting concepts into useful digital solutions is my area of competence.",
-  },
-  {
-    id: 3,
-    title: "Google ads",
-    img: ads,
-    desc: "I create targeted ad campaigns that maximize reach and conversions.With data- driven strategies, I help businesses achieve measurable growth.",
-  },
-  {
-    id: 4,
-    title: "SEO (Search Engine Optimization)",
-    img: seo,
-    desc: "I optimize websites to improve visibility on search engines. By applying on-page and off-page strategies, I drive organic traffic effectively.",
-  },
-  {
-    id: 5,
-    title: "Content Writing",
-    img: content,
-    desc: "I write engaging and SEO-friendly content that resonates with audiences.My words are tailored to inform, inspire, and strengthen brand identity.",
-  },
-];
+import html from '../../assets/html.png';
+import css from '../../assets/css.png';
+import javascripti from '../../assets/javascript.png';
+import react from '../../assets/reactjs.png';
+import ads from '../../assets/ads.png';
+import content from '../../assets/content.png';
+import seo from '../../assets/seo.png';
 
 const Skills = () => {
-  return (
-    <Grid
-      container
-      sx={{
-        position: 'relative',
-        backgroundColor: 'rgb(13, 1, 33)',
-        px: { md: 10, xs: 3, sm: 6 },
-        py: { md: 6, xs: 4 },
-        mt: { md: -8, xs: 3 },
-        minHeight: { xs: '100vh', md: '90vh' },
-        overflow: 'hidden',
-        justifyContent: 'center',
-      }}
-    >
-      <Box sx={{ width: '100%' }}>
-        {/* Heading */}
-        <Typography
-          variant="h2"
-          sx={{
-            color: 'white',
-            fontWeight: 600,
-            fontFamily: 'inherit',
-            fontSize: { md: '3rem', xs: '2rem' },
-            textAlign: 'center',
-          }}
-        >
-          What I Do
-        </Typography>
+    const stats = [
+        { count: 1.5, label: 'Year of Experience', img: html },
+        { count: 1.5, label: 'Year of Experience', img: css },
+        { count: 10, label: 'Completed Projects', img: javascripti },
+        { count: 5, label: 'Expert Employees', img: react },
+        { count: 5, label: 'Expert Employees', img: ads },
+        { count: 5, label: 'Expert Employees', img: content },
+        { count: 5, label: 'Expert Employees', img: seo },
+    ];
 
-        <Typography
-          variant="body2"
-          sx={{
-            color: 'lightgray',
-            fontFamily: 'inherit',
-            fontSize: { md: '1.2rem', sm: '1.3rem', xs: '0.9rem' },
-            lineHeight: 2,
-            textAlign: 'center',
-            mt: 2,
-            mb: 5,
+    // ✅ Seamless scroll keyframes
+    const scrollText = keyframes`
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    `;
 
-          }}
-        >
-          I am a skilled and passionate web designer with experience in creating visually appealing and user-friendly websites. I have a strong understanding of design and a keen eye for detail. I am proficient in HTML, CSS, JavaScript, and React.js. Along with my technical expertise, I also have knowledge of digital marketing, including SEO, Google Ads, and content strategies, which helps me create websites that not only look great but also perform effectively in reaching the right audience.
-        </Typography>
+    const scrollImages = {
+        display: 'flex',
+        animation: `${scrollText} 20s linear infinite`,
+    };
 
-        {/* Skills List Style */}
-        <Grid container spacing={3} justifyContent="center">
-          {skillsData.map((skill) => (
-            <Grid item xs={12} md={6} key={skill.id}>
-              <Card
+    const imgStyle = {
+        display: 'inline-block',
+        marginRight: { md: '40px', xs: '10px' },
+        width: { xs: '60px', sm: '80px', md: '100px' }, // responsive
+        height: 'auto',
+        flexShrink: 0,
+    };
+
+    const imgContainerStyle = {
+        width: '100%',
+        height: 'auto',
+        maxHeight: { xs: '80px', sm: '100px', md: '120px' }, // responsive
+        borderRadius: '8px',
+    };
+
+    return (
+        <Container>
+            <Grid
+                container
+                justifyContent="center"
                 sx={{
-                  background: 'lightgray',
-                  color: '#1e1e1e',
-                  height: '25vh',
-                  borderRadius: 2,
-                  boxShadow: 3,
-                  p: 4,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 2,
-                  "&:hover": { transform: 'translateY(-5px)', boxShadow: 8 },
+                    backgroundColor: 'rgb(13, 1, 33)',
+                    py: 6,
+
                 }}
-              >
-                {/* Icon */}
+            >
+                <Typography
+                    variant="h2"
+                    sx={{
+                        color: 'white',
+                        fontWeight: 600,
+                        fontFamily: 'inherit',
+                        fontSize: { md: '2.5rem', xs: '2rem' },
+                        textAlign: 'center',
+                        mb: 5,
+                        width: '100%',
+                    }}
+                >
+                    My Skills
+                </Typography>
+
                 <Box
-                  component="img"
-                  src={skill.img}
-                  alt={skill.title}
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    objectFit: 'contain',
-                  }}
-                />
-                {/* Title + Description */}
-                <Box>
-                  <Typography
-                    variant="h6"
                     sx={{
-                      fontWeight: 600,
-                      fontSize: { md: "1.2rem", sm: "1.2rem", xs: "1rem" },
+                        backgroundColor: '#fff',
+                        width: '200%',
+                        overflow: 'hidden',
+                        borderRadius: 5,
+                        py: 2,
                     }}
-                  >
-                    {skill.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: "black",
-                      linespace: 2,
-                      fontSize: { md: "1rem", xs: "0.85rem", sm: '1.3rem', },
-                    }}
-                  >
-                    {skill.desc}
-                  </Typography>
+                >
+                    {/* Duplicate stats for seamless scroll */}
+                    <Box sx={scrollImages} gap={10}>
+                        {[...stats, ...stats].map((stat, index) => (
+                            <Box key={index} sx={imgStyle}>
+                                <Box
+                                    component="img"
+                                    src={stat.img}
+                                    alt={`portfolio ${index}`}
+                                    sx={imgContainerStyle}
+                                />
+                            </Box>
+                        ))}
+                    </Box>
                 </Box>
-              </Card>
             </Grid>
-          ))}
-        </Grid>
-      </Box>
-    </Grid>
-  );
+        </Container>
+    );
 };
 
 export default Skills;

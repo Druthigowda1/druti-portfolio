@@ -1,22 +1,23 @@
-import './App.css';
-import Intro from './components/navbar/Intro';
+import React from 'react';
 import Header from './components/navbar/Header';
-import Skills from './components/navbar/Skills'
-import { Grid } from '@mui/material';
-import Works from './components/navbar/Works';
-import Languages from './components/navbar/Languages';
-import Projects from './components/navbar/Projects'
+import Intro from './components/navbar/Intro';
+import Aboutme from './components/navbar/Aboutme';
+import Skills from './components/navbar/Skills';
+import Projects from './components/navbar/Projects';
+import Experience from './components/navbar/Experience';
+import Contact from './components/navbar/Contact';
 
 function App() {
   return (
-    <Grid sx={{ overflow: 'hidden', }}>
+    <>
       <Header />
       <Intro />
+      <Aboutme />
+      <Experience />
       <Skills />
-      <Works />
-      <Languages />
       <Projects />
-    </Grid>
+      <Contact />
+    </>
   );
 }
 

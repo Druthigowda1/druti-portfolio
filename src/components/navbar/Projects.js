@@ -1,212 +1,243 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     Box,
     Card,
     CardContent,
-    CardActions,
-    CardMedia,
     Typography,
+    Stack,
+    Grid,
     IconButton,
     Button,
-    Stack,
-    Container,
+    Divider,
 } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import DownloadIcon from '@mui/icons-material/Download';
 
 /* ================================
-   Slideshow Component (images)
+   PDFViewer Component (auto-scroll on hover)
 ================================ */
-function Slideshow({ slides = [], autoPlay = true, interval = 3000, height = 220 }) {
-    const [index, setIndex] = useState(0);
-    const [playing, setPlaying] = useState(autoPlay && slides.length > 1);
-    const timerRef = useRef(null);
+function PDFViewer({ url, height = 300 }) {
+    const scrollRef = useRef(null);
+    const scrollIntervalRef = useRef(null);
+    const [isHovering, setIsHovering] = useState(false);
 
     useEffect(() => {
-        if (playing && slides.length > 1) {
-            timerRef.current = setInterval(() => {
-                setIndex((i) => (i + 1) % slides.length);
-            }, interval);
+        const container = scrollRef.current;
+        if (!container) return;
+
+        if (isHovering) {
+            scrollIntervalRef.current = setInterval(() => {
+                if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+                    container.scrollTop = 0;
+                } else {
+                    container.scrollTop += 1;
+                }
+            }, 30);
+        } else {
+            clearInterval(scrollIntervalRef.current);
         }
-        return () => clearInterval(timerRef.current);
-    }, [playing, slides.length, interval]);
 
-    useEffect(() => setIndex(0), [slides]);
+        return () => clearInterval(scrollIntervalRef.current);
+    }, [isHovering]);
 
-    const prev = () => {
-        setIndex((i) => (i - 1 + slides.length) % slides.length);
-        setPlaying(false);
-    };
-    const next = () => {
-        setIndex((i) => (i + 1) % slides.length);
-        setPlaying(false);
-    };
-
-    if (!slides || slides.length === 0) {
+    if (!url) {
         return (
             <Box
-                sx={{ height, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#f5f5f5' }}
+                sx={{
+                    height,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: '#f5f5f5',
+                }}
             >
                 <Typography variant="body2" color="text.secondary">
-                    No slides provided
+                    No PDF provided
                 </Typography>
             </Box>
         );
     }
 
     return (
-        <Box>
-            <CardMedia
-                component="img"
-                image={slides[index]}
-                alt={`slide-${index + 1}`}
-                sx={{ height, objectFit: 'cover' }}
+        <Box
+            ref={scrollRef}
+            sx={{
+                height,
+                overflowY: 'scroll',
+                borderRadius: 2,
+                scrollbarWidth: 'none',
+                '&::-webkit-scrollbar': { display: 'none' },
+                cursor: 'pointer',
+                boxShadow: 3,
+            }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+        >
+            <iframe
+                src={url}
+                width="100%"
+                height="1200px"
+                frameBorder="0"
+                title="pdf-viewer"
+                style={{
+                    pointerEvents: 'none',
+                    borderRadius: 8,
+                }}
             />
-
-            <CardActions sx={{ justifyContent: 'space-between' }}>
-                <Box>
-                    <IconButton onClick={prev} aria-label="previous slide">
-                        <ArrowBackIosNewIcon />
-                    </IconButton>
-                    <IconButton onClick={next} aria-label="next slide">
-                        <ArrowForwardIosIcon />
-                    </IconButton>
-                </Box>
-
-                <Stack direction="row" alignItems="center" spacing={1}>
-                    <Typography variant="caption">{index + 1}/{slides.length}</Typography>
-                    <IconButton
-                        onClick={() => setPlaying((p) => !p)}
-                        aria-label={playing ? 'pause' : 'play'}
-                        size="small"
-                    >
-                        {playing ? <PauseIcon /> : <PlayArrowIcon />}
-                    </IconButton>
-                </Stack>
-            </CardActions>
-
-            <Box sx={{ display: 'flex', gap: 0.5, justifyContent: 'center', p: 1 }}>
-                {slides.map((_, i) => (
-                    <Box
-                        key={i}
-                        onClick={() => { setIndex(i); setPlaying(false); }}
-                        sx={{
-                            width: 10,
-                            height: 10,
-                            borderRadius: '50%',
-                            bgcolor: i === index ? 'primary.main' : 'grey.400',
-                            cursor: 'pointer',
-                        }}
-                    />
-                ))}
-            </Box>
         </Box>
     );
 }
 
 /* ================================
-   Iframe PPT Component (embed .pptx)
-================================ */
-function IframePPT({ url, height = 250 }) {
-    if (!url) {
-        return (
-            <Box
-                sx={{ height, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#f5f5f5' }}
-            >
-                <Typography variant="body2" color="text.secondary">
-                    No PPT provided
-                </Typography>
-            </Box>
-        );
-    }
-
-    const embedUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}`;
-
-    return (
-        <iframe
-            src={embedUrl}
-            width="100%"
-            height={height}
-            frameBorder="0"
-            allowFullScreen
-            title="ppt-embed"
-            style={{ borderRadius: 8 }}
-        />
-    );
-}
-
-/* ================================
-   Main Component: 3 Cards
+   Main Component: PDF Cards
 ================================ */
 export default function PPTCards() {
-    // Example slide images for cards A & C
-    const slides1 = [
-        'https://picsum.photos/800/450?random=101',
-        'https://picsum.photos/800/450?random=102',
-        'https://picsum.photos/800/450?random=103',
-    ];
-    const slides3 = [
-        'https://picsum.photos/800/450?random=301',
-        'https://picsum.photos/800/450?random=302',
-        'https://picsum.photos/800/450?random=303',
+    const pdfs = [
+        {
+            url: '/getmoredigital.pdf',
+            title: 'GetMoreDigital',
+            external: false,
+            link: 'https://www.getmoredigital.com/'
+        },
+        {
+            url: '/pucolleges.pdf',
+            title: 'PU Colleges',
+            external: false,
+            link: 'https://pucollegesinbangalore.com/'
+        },
+        {
+            url: 'https://pucollegesinbangalore.com/',
+            title: 'PU Colleges Website',
+            external: false,
+            link: 'https://pucollegesinbangalore.com/'
+        },
     ];
 
-    // External PPT URL (hosted or in /public folder)
-    // 👉 If file is in /public, just use "/presentation.pptx"
-    // ✅ Correct way
-    const pptUrl = "/getmoredigital.pptx";
-
+    const handleDownload = (pdf) => {
+        if (pdf.external || pdf.url.startsWith('http')) {
+            window.open(pdf.url, '_blank');
+        } else {
+            const link = document.createElement('a');
+            link.href = pdf.url;
+            link.download = pdf.title + '.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
 
     return (
-        <Container sx={{ py: 4 }}>
-            <Typography variant="h5" sx={{ mb: 3, textAlign: 'center' }}>
-                3 PPT Cards (Images + Embedded PPT)
-            </Typography>
+        <Grid
+            container
+            id="projects"
+            sx={{
+                py: 6,
+                px: { md: 10, xs: 2, sm: 4 },
+                minHeight: { md: '90vh', xs: 'auto', sm: '100vh' },
+            }}
+        >
+            <Box sx={{ width: '100%' }}>
+                {/* Heading */}
+                <Typography
+                    variant="h2"
+                    sx={{
+                        color: 'white',
+                        fontWeight: 600,
+                        fontFamily: 'inherit',
+                        fontSize: { md: '3rem', xs: '2rem' },
+                        textAlign: 'center',
+                    }}
+                >
+                    Projects
+                </Typography>
 
-            <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
-                {/* Card A - Slideshow */}
-                <Card sx={{ flex: 1 }}>
-                    <Slideshow slides={slides1} autoPlay interval={2500} height={200} />
-                    <CardContent>
-                        <Typography variant="h6">Presentation A</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            This one is shown as images (slideshow).
-                        </Typography>
-                    </CardContent>
-                </Card>
+                <Typography
+                    variant="body2"
+                    sx={{
+                        color: 'lightgray',
+                        fontFamily: 'inherit',
+                        fontSize: { md: '1.2rem', sm: '1rem', xs: '0.9rem' },
+                        lineHeight: 2,
+                        textAlign: 'center',
+                        mt: 2,
+                        mb: 5,
+                        px: { xs: 1, sm: 4, md: 12 },
+                    }}
+                >
+                    <FormatQuoteIcon sx={{ color: 'orange', transform: 'rotate(180deg)', mt: '-8px', fontSize: '28px' }} />
+                    Here is a showcase of my projects that demonstrate my expertise in building modern web applications and dynamic e-commerce platforms.
+                    Each project reflects my ability to blend creative design with robust development, delivering user-friendly, scalable, and results-driven digital solutions
+                    <FormatQuoteIcon sx={{ color: 'orange', fontSize: '28px' }} />
+                </Typography>
+            </Box>
 
-                {/* Card B - Embedded PPTX */}
-                <Card sx={{ flex: 1 }}>
-                    <IframePPT url={pptUrl} height={200} />
-                    <CardContent>
-                        <Typography variant="h6">Presentation B</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            This is an embedded external PowerPoint file.
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small" href={pptUrl} target="_blank">
-                            Open Full
-                        </Button>
-                        <Button size="small" href={pptUrl} download>
-                            Download
-                        </Button>
-                    </CardActions>
-                </Card>
+            {/* Cards */}
+            <Stack
+                direction={{ xs: 'column', md: 'row' }}
+                spacing={{ md: 9, xs: 4 }}
+                sx={{ width: '100%', alignItems: 'center' }}
+            >
+                {pdfs.map((pdf, index) => (
+                    <Card
+                        key={index}
+                        sx={{
+                            width: { xs: '100%', sm: '100%', md: '100%' },
+                            maxWidth: { md: '380px' },
+                            height: { xs: 'auto', md: 420 },
+                            borderRadius: '20px',
+                            border: '1px solid yellow',
+                            position: 'relative',
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}
+                    >
+                        {/* Download Icon */}
+                        <IconButton
+                            onClick={() => handleDownload(pdf)}
+                            sx={{
+                                position: 'absolute',
+                                top: 10,
+                                right: 10,
+                                backgroundColor: 'yellow',
+                                color: 'black',
+                                '&:hover': { backgroundColor: 'orange' },
+                                zIndex: 10,
+                            }}
+                        >
+                            <DownloadIcon />
+                        </IconButton>
 
-                {/* Card C - Slideshow */}
-                <Card sx={{ flex: 1 }}>
-                    <Slideshow slides={slides3} autoPlay interval={2000} height={200} />
-                    <CardContent>
-                        <Typography variant="h6">Presentation C</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Another one displayed with images (slideshow).
-                        </Typography>
-                    </CardContent>
-                </Card>
+                        <PDFViewer url={pdf.url} height={250} />
+                        <Divider sx={{ width: '90%', background: 'black', mt: 2, mx: 'auto' }} />
+                        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
+                            <Typography
+                                variant="h6"
+                                sx={{ textAlign: { xs: 'center', md: 'left' }, fontSize: { xs: '1rem', sm: '1.1rem' } }}
+                            >
+                                {pdf.title}
+                            </Typography>
+                            {pdf.link && (
+                                <Button
+                                    component="a"
+                                    href={pdf.link}
+                                    target="_blank"
+                                    sx={{
+                                        mt: 1,
+                                        background: "lightyellow",
+                                        color: 'black',
+                                        borderRadius: "20px",
+                                        fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                                        px: { xs: 2, sm: 3 },
+                                    }}
+                                    variant="contained"
+                                >
+                                    Know more
+                                </Button>
+                            )}
+                        </CardContent>
+                    </Card>
+                ))}
             </Stack>
-        </Container>
+        </Grid>
     );
 }

@@ -1,6 +1,6 @@
 import { Grid, Typography, Button, Box } from '@mui/material';
 import React from 'react';
-import image from '../../assets/image1.jpg';
+import image from '../../assets/image21.png';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 
 const Intro = () => {
@@ -12,7 +12,7 @@ const Intro = () => {
                 backgroundColor: 'rgb(13, 1, 33)',
                 px: { md: 0, xs: 0 },
                 mt: { md: 7, xs: 8 },
-                height: { xs: '80vh', md: '90vh', sm: '60vh' },
+                height: { xs: '50vh', md: '90vh', sm: '60vh' },
                 overflow: 'hidden',
                 alignItems: 'stretch',  // Make children fill container height fully
             }}

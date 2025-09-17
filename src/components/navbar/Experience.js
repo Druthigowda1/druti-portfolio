@@ -1,75 +1,80 @@
+import { Grid, Typography, Box } from '@mui/material';
 import React from 'react';
-import { Typography, Grid, Container } from '@mui/material';
+import aboutImg from '../../assets/aboutme.png'; // Replace with your preferred image
+import Stats from './Stats';
 
-const Experince = () => {
-    const stats = [
-        {
-            count: 1.5,
-            label: 'Year of Experience',
-        },
-        {
-            count: 10,
-            label: 'Completed Projects',
-        },
-        {
-            count: 5,
-            label: 'Expert Employees',
-        },
-    ];
-
+const Experience = () => {
     return (
-        <Container
-            maxWidth={false}
+        <Grid
+            container
+            id="experience"
             sx={{
-                backgroundColor: '#ed5345',
-                py: { xs: 2, md: 2, },
-                px: 2,
-                width: { md: '45vw', sm: '85vw', xs: '90vw' },
-                borderRadius: 2,
+                backgroundColor: 'rgb(13, 1, 33)',
+                px: { md: 10, xs: 3, sm: 6 },
+                py: { md: 2, xs: 4, sm: 2 },
+                minHeight: { xs: '80vh', md: '70vh', sm: '70vh' },
+                justifyContent: 'center',
+                alignItems: 'center',
             }}
         >
-            <Grid
-                container
-                spacing={2} // Increased spacing between items
-                justifyContent="center"
-                alignItems="center"
-            >
-                {stats.map((stat, index) => (
-                    <Grid
-                        item
-                        xs={4}
-                        sm={4}
-                        key={index}
+            {/* LEFT SIDE: Text Content */}
+            <Grid item xs={12} md={7}>
+                <Box sx={{ width: '100%' }}>
+                    <Typography
+                        variant="h2"
                         sx={{
-                            textAlign: 'center',
-                            px: 2, // horizontal padding between boxes
+                            color: 'white',
+                            fontWeight: 600,
+                            fontFamily: 'inherit',
+                            fontSize: { md: '3rem', xs: '2rem' },
+                            textAlign: { xs: 'center', md: 'left' },
                         }}
                     >
-                        <Typography
-                            variant="h4"
-                            sx={{
-                                fontWeight: 'bold',
-                                color: 'white',
-                                fontSize: { xs: '1.1rem', md: '1.0rem', },
-                            }}
-                        >
-                            {stat.count}+
-                        </Typography>
-                        <Typography
-                            variant="subtitle1"
-                            sx={{
-                                color: 'white',
-                                fontSize: { xs: '1rem', md: '1.0rem' },
-                                mt: 1,
-                            }}
-                        >
-                            {stat.label}
-                        </Typography>
+                        Career Experience
+                    </Typography>
+
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            color: 'lightgray',
+                            fontFamily: 'inherit',
+                            fontSize: { md: '1.3rem', xs: '0.95rem', sm: '1.3rem' },
+                            lineHeight: 1.6,
+                            textAlign: { xs: 'center', md: 'left' },
+                            mt: 2,
+                            mb: 4,
+                        }}
+                    >
+                        I take pride in paying attention to the smallest details and ensuring every element of a website is both visually polished and functionally precise. From responsive layouts and intuitive navigation to performance optimization and accessibility, I strive to deliver pixel-perfect, user-friendly web experiences. I am passionate about combining clean code with creative design to build websites that not only look professional but also drive results.
+                    </Typography>
+
+                    {/* Experince as md={6} */}
+                    <Grid container justifyContent={{ xs: 'center', md: 'flex-start' }}>
+                        <Grid item xs={12} md={6} >
+                            <Stats />
+                        </Grid>
                     </Grid>
-                ))}
+                </Box>
             </Grid>
-        </Container >
+
+            {/* RIGHT SIDE: Image */}
+            <Grid item xs={12} md={5} sx={{ px: 5, display: 'flex', }}>
+                <Box
+                    component="img"
+                    src={aboutImg}
+                    alt="About Me"
+                    sx={{
+                        width: '90%',
+                        height: '90%',
+                        maxHeight: { xs: 300, md: 400, sm: 700 },
+                        objectFit: 'cover',
+                        borderRadius: 4,
+                        mt: { xs: 4, md: 2, },
+                    }}
+                />
+            </Grid>
+        </Grid>
     );
 };
 
-export default Experince;
+export default Experience;
