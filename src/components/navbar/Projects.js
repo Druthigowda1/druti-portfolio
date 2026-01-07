@@ -100,10 +100,10 @@ export default function PPTCards() {
             link: 'https://www.getmoredigital.com/'
         },
         {
-            url: 'https://www.pucollegesinbangalore.com/',
-            title: 'PU Colleges',
+            url: 'https://pucollegesinbangalore.vercel.app/',
+            title: 'PU Colleges in Bangalore',
             external: false,
-            link: 'https://www.pucollegesinbangalore.com/'
+            link: 'https://pucollegesinbangalore.vercel.app/'
         },
         {
             url: 'https://smiti-constructions.vercel.app/',

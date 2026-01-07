@@ -6,18 +6,19 @@ import Skills from "./components/navbar/Skills";
 import Projects from "./components/navbar/Projects";
 import Experience from "./components/navbar/Experience";
 import Contact from "./components/navbar/Contact";
-import ClickSpark from "./components/ClickSpark"; // adjust path if needed
+import ClickSpark from "./components/ClickSpark";
+import Ballpit from "./components/Ballpit";
 
 function App() {
   return (
     <>
-      {/* 🔥 Global Click Spark */}
+
       <div
         style={{
           position: "fixed",
           inset: 0,
           pointerEvents: "none",
-          zIndex: 9999,
+          zIndex: 0,
         }}
       >
         <ClickSpark
@@ -31,14 +32,16 @@ function App() {
         />
       </div>
 
-      {/* Your existing layout (UNCHANGED) */}
-      <Header />
-      <Intro />
-      <Aboutme />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Contact />
+      {/* 🧱 WEBSITE CONTENT */}
+      <div style={{ position: "relative", zIndex: 0 }}>
+        <Header />
+        <Intro />
+        <Aboutme />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Contact />
+      </div>
     </>
   );
 }

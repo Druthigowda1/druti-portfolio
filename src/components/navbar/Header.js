@@ -20,7 +20,7 @@ const Header = () => {
                     position: 'fixed',
                     top: 0,
                     px: { md: '70px', xs: '10px' },
-                    zIndex: 1300,
+                    zIndex: 1,
                     backgroundColor: 'rgb(13, 1, 33)',
                 }}
             >
