@@ -196,7 +196,7 @@ const Contact = () => {
                     </Grid>
 
                     {/* Right Column: Contact Details */}
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={6} sx={{ mt: { md: 12, xs: 0 } }}>
                         <Box sx={{ textAlign: { xs: 'center', md: 'left' }, px: { xs: 1, md: 4 }, justifyContent: { xs: 'center', md: 'center' } }}>
                             <Typography
                                 variant="h4"
@@ -218,8 +218,8 @@ const Contact = () => {
 
                             <Typography variant="body1" sx={{ mb: 2, fontSize: "1.1rem", color: 'lightgray' }}>
                                 📱 Phone:{" "}
-                                <a href="tel:+911234567890" style={{ color: 'lightgray', textDecoration: 'none' }}>
-                                    +91 12345 67890
+                                <a href="tel:+918150083184" style={{ color: 'lightgray', textDecoration: 'none' }}>
+                                    +91 8150083184
                                 </a>
                             </Typography>
 
