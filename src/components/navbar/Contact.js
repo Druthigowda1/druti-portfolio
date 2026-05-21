@@ -211,8 +211,8 @@ const Contact = () => {
 
                             <Typography variant="body1" sx={{ mb: 2, fontSize: "1.1rem", color: 'lightgray' }}>
                                 📧 Email:{" "}
-                                <a href="mailto:youremail@gmail.com" style={{ color: 'lightgray', textDecoration: 'none' }}>
-                                    youremail@gmail.com
+                                <a href="mailto:sahananv01@gmail.com" style={{ color: 'lightgray', textDecoration: 'none' }}>
+                                    sahananv01@gmail.com
                                 </a>
                             </Typography>
 
